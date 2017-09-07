@@ -1,9 +1,12 @@
 package com.hebj.forecast.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.jdom2.JDOMException;
 
 public class ReadPathData {
 
@@ -11,9 +14,11 @@ public class ReadPathData {
 	 * 读取路径
 	 * 
 	 * @author hebj
+	 * @throws IOException 
+	 * @throws JDOMException 
 	 */
 
-	public static String getPath(Date time, String shiCi, int age, String forecastType, String modeType) {
+	public static String getPath(Date time, String shiCi, int age, String forecastType, String modeType) throws JDOMException, IOException {
 		String path;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 		String rootPath = ReadDataFromConfig.getValue("micaps路径");

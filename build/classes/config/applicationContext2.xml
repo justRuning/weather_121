@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.2.xsd
+         http://www.springframework.org/schema/tx
+     	 http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+         http://www.springframework.org/schema/aop 
+         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		 http://www.springframework.org/schema/mvc 
+		 http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		 http://www.springframework.org/schema/task 
+		 http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!-- 开启IOC注解扫描 -->
+	<context:component-scan base-package="com.hebj.forecast" />
+
+	<!-- 开启MVC注解扫描 -->
+	<mvc:annotation-driven />
+
+	<!-- 以下为定时器 -->
+
+<!-- 
+	<task:scheduled-tasks>
+		<task:scheduled ref="task" method="weahterAct" cron="0 8,11 * * * *" />
+	</task:scheduled-tasks>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="task" method="readEC"
+			cron="00 00 4,5,13,14,15 * * *" />
+	</task:scheduled-tasks>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="task" method="readT639"
+			cron="00 00 4,5,13,14,15 * * *" />
+	</task:scheduled-tasks>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="task" method="readPhysic"
+			cron="00 00 4,5,13,14,15 * * *" />
+	</task:scheduled-tasks>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="task" method="readGrapes"
+			cron="00 00 4,5,13,14,15,22 * * *" />
+	</task:scheduled-tasks>
+
+	<task:scheduled-tasks>
+		<task:scheduled ref="task" method="readError" cron="00 30 * * * *" />
+	</task:scheduled-tasks>
+ -->
+
+
+
+	<!-- <task:scheduled-tasks> <task:scheduled ref="task" method="readEC4" 
+		cron="00 39 10 * * *" /> </task:scheduled-tasks> <task:scheduled-tasks> <task:scheduled 
+		ref="task" method="readEC5" cron="00 39 10 * * *" /> </task:scheduled-tasks> 
+		<task:scheduled-tasks> <task:scheduled ref="task" method="readEC6" cron="00 
+		39 10 * * *" /> </task:scheduled-tasks> -->
+
+	<task:executor id="myexecutor" pool-size="500" />
+	<task:annotation-driven executor="myexecutor" />
+
+
+
+
+
+	<bean id="ModeForecast" class="com.hebj.forecast.service.impl.ModeForecastServiceImpl"
+		scope="prototype">
+	</bean>
+
+	<!-- 以下为数据库和hibernate配置 -->
+	<context:property-placeholder location="classpath:config/db.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		scope="prototype" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.mysql.driverClassName}" />
+		<property name="url" value="${jdbc.mysql.url}" />
+		<property name="username" value="${jdbc.mysql.username}" />
+		<property name="password" value="${jdbc.mysql.password}" />
+		<property name="maxActive" value="5000"></property>
+		<property name="minIdle" value="200"></property>
+		<property name="maxWait" value="3000"></property>
+		<property name="initialSize" value="300"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>com.hebj.forecast.entity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="hibernateTemplateMysql" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- 定义事务管理器（声明式的事务） -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="interceptorPointCuts"
+			expression="execution(* com.hebj.forecast.service.impl.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+	</aop:config>
+
+
+	<!-- 以下为视图映射配置 -->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value="" />
+	</bean>
+
+
+	<!-- 其他配置 -->
+	<!-- 静态文件访问 -->
+	<mvc:default-servlet-handler />
+</beans>

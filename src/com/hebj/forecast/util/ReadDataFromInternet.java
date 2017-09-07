@@ -57,12 +57,55 @@ public class ReadDataFromInternet {
 	}
 
 	/**
-	 * 通过站号获取天气在线网站7天预报url
+	 * 通过台站id得到中国天气网url
 	 * 
 	 * @param stationID
 	 * @return
 	 */
-	public static String getT7OnlineURL(String stationID) {
+	public static String getChinaForecastURL(String stationID) {
+		String url = null;
+		switch (stationID) {
+		case "53513":
+			url = "http://www.weather.com.cn/weather/101080801.shtml";
+			break;
+		case "53419":
+			url = "http://www.weather.com.cn/weather/101080803.shtml";
+			break;
+		case "53420":
+			url = "http://www.weather.com.cn/weather/101080810.shtml";
+			break;
+		case "53337":
+			url = "http://www.weather.com.cn/weather/101080802.shtml";
+			break;
+		case "53433":
+			url = "http://www.weather.com.cn/weather/101080804.shtml";
+			break;
+		case "53336":
+			url = "http://www.weather.com.cn/weather/101080806.shtml";
+			break;
+		case "53324":
+			url = "http://www.weather.com.cn/weather/101080807.shtml";
+			break;
+		case "53231":
+			url = "http://www.weather.com.cn/weather/101080808.shtml";
+			break;
+		case "53348":
+			url = "http://www.weather.com.cn/weather/101080805.shtml";
+			break;
+		default:
+			break;
+		}
+		return url;
+	}
+
+	/**
+	 * 通过站号获取天气在线网站7天预报url
+	 * 
+	 * @param stationID
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getT7OnlineURL(String stationID) throws IOException {
 
 		String url = "http://www.t7online.com/cgi-bin/citybild?WMO=" + stationID
 				+ "&LANG=cn&BKM=InnereMongolei/Linhe&SID=b";
@@ -70,14 +113,16 @@ public class ReadDataFromInternet {
 				+ "&LAND=CI&LANG=cn";
 		String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36";
 		Document doc;
-		try {
+		try{
 			doc = Jsoup.connect(url).referrer(referer).userAgent(userAgent).ignoreContentType(true).get();
-			Elements links = doc.getElementsByTag("a");
-			String link = "http://www.t7online.com" + links.get(3).attr("onclick").split("'")[1];
-			return link;
-		} catch (IOException e) {
+		}
+		catch (Exception e) {
 			return null;
 		}
+		
+		Elements links = doc.getElementsByTag("a");
+		String link = "http://www.t7online.com" + links.get(3).attr("onclick").split("'")[1];
+		return link;
 	}
 
 	/**
@@ -85,27 +130,27 @@ public class ReadDataFromInternet {
 	 * 
 	 * @param url
 	 * @return
+	 * @throws IOException 
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static String getHtmlContent(String url, String encoding) {
-		URL getURL;
-		try {
-			getURL = new URL(url);
-		} catch (MalformedURLException e1) {
+	public static String getHtmlContent(String url, String encoding) throws UnsupportedEncodingException, IOException {
+		if (url == null) {
 			return null;
 		}
+		URL getURL;
+		getURL = new URL(url);
 		String temp = null;
 		StringBuffer content = new StringBuffer();
+		BufferedReader in = null;
 		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(getURL.openStream(), encoding));
-			while ((temp = in.readLine()) != null) {
-				content.append(temp);
-			}
-			in.close();
-		} catch (UnsupportedEncodingException e) {
-			return null;
-		} catch (IOException e) {
+			in = new BufferedReader(new InputStreamReader(getURL.openStream(), encoding));
+		} catch (Exception e) {
 			return null;
 		}
+		while ((temp = in.readLine()) != null) {
+			content.append(temp);
+		}
+		in.close();
 		return content.toString();
 	}
 }

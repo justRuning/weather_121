@@ -1,0 +1,376 @@
+
+
+
+
+
+.container{padding-top: 15px; color: #fff; width: 1216px;}
+.navigation a{padding: 0 10px;}
+.home{background: url("../images/forecast/weather_home.gif") no-repeat scroll 20px center #5199c8;}
+.cityselect{height: 34px; line-height: 34px; text-align: right; padding-right: 20px; font-size: 14px;}
+.cityselect select{width: 120px; margin: 0 10px; margin-top: -4px;}
+
+.real .left{width: 506px;}
+.cityname{overflow: hidden;}
+.cityname div{font-size: 70px; height: 185px; line-height: 185px;}
+.cityname .label{font-size: 24px; padding: 0 30px 0 20px;}
+.alarmmsg{background: url("../images/forecast/alarm.png") no-repeat left center; height: 55px; line-height: 55px; padding-left: 36px;}
+.alarmmsg a{color: #fff; font-size: 16px;}
+
+.rcrl{background:url(../images/bj-01.png) no-repeat; width:376px; height:119px; position:relative;}
+.sunrise{position:absolute; left:0; top:119px;}
+.sunset{position:absolute; right:0; top:119px;}
+.sun{position:absolute; width:19px; height:19px;}
+.sun0{background: none;}
+.sun1{ background:url(../images/ty-01.png) no-repeat;left: 28px; top: 90px;}
+.sun2{ background:url(../images/ty-01.png) no-repeat;left: 40px; top: 70px;}
+.sun3{ background:url(../images/ty-01.png) no-repeat;left: 80px; top: 28px;}
+.sun4{ background:url(../images/ty-01.png) no-repeat;left: 120px; top: 4px;}
+.sun5{ background:url(../images/ty-01.png) no-repeat;left: 180px; top: -10px;}
+.sun6{ background:url(../images/ty-01.png) no-repeat;left: 220px; top: -4px;}
+.sun7{ background:url(../images/ty-01.png) no-repeat;left: 260px; top: 14px;}
+.sun8{ background:url(../images/ty-01.png) no-repeat;left: 300px; top: 52px;}
+.sun9{ background:url(../images/ty-01.png) no-repeat;left: 325px; top: 90px;}
+
+.real .right{width:710px; height:406px; position: relative; overflow: hidden;}
+.real .right .ybword{font-size: 24px; position: absolute; top: 66px;}
+.realt{padding-left: 50px; padding-top: 80px; height: 120px;}
+.realt .tw{width: 277px; overflow: hidden;}
+.realt .icon,.realt .tw,.realt .fdate{float: left; padding-left: 28px; height: 120px;}
+.realt .icon{padding-top: 7px; height: 113px;}
+.tw .temp{font-size: 48px; height: 80px; line-height: 80px;}
+.tw .weather{font-size: 18px; height: 40px; line-height: 40px;}
+.tw .weather .wind{float: right;}
+.realt .fdate td{font-size: 16px;}
+.realt .fdate .refresh{background: url("../images/forecast/refresh.png") no-repeat center; width: 32px; height: 32px; display: block; margin: 30px;}
+
+.livelabel{font-size: 24px; margin: 40px 0 10px 60px;}
+.livelabel span{float: right; font-weight: normal; font-size: 14px;}
+.livetable {margin-left: 60px;}
+.livetable table{border-collapse: collapse; width: 100%; height: 100%;}
+.livetable td{ border: 1px solid #fff; vertical-align: middle; text-align: center; height: 145px; width: 177px; font-size: 18px;}
+.livetable td span{font-size: 20px; font-weight: bold;}
+.livetable table table td{border: 0; width: 236px;}
+.livetable table table td.mdtd{border-left: 1px solid #fff; border-right: 1px solid #fff;}
+.livetable td div{height: 125px;}
+
+.btitle{font-size: 24px; margin: 20px 0; position: relative;}
+.btitle #settingCity{top: 0;}
+.btitle span{position: absolute; right: 0; font-size: 14px;}
+.forecast .detail{float:left; overflow: hidden; cursor: pointer;}
+.forecast .detail .today{display: none;}
+.forecast .today{background: url("/IntegratedForecast/style/img/today.jpg") no-repeat left top;width: 135px; height: 309px; float: left; margin-left: 10px; text-align: center; padding: 20px 0;}
+.forecast .today div{ font-size: 18px;}
+.forecast .today .date{height: 45px; line-height: 45px;}
+.forecast .today .week{height: 35px; line-height: 35px; font-size: 14px;}
+.forecast .today .wicon{height: 60px; line-height: 60px; margin-top: 15px;}
+.forecast .today .direct{height: 40px; line-height: 40px; font-size: 16px;}
+.forecast .today .wind{height: 40px; line-height: 40px; font-size: 16px;}
+.forecast .today .wdesc{height: 40px; line-height: 40px; font-size: 16px;}
+.forecast .today .temp{height: 40px; line-height: 40px; font-size: 16px;}
+
+.forecast .day{background: url("/IntegratedForecast/style/img/day.png") no-repeat left top; width: 120px; height: 309px; float: left; margin-left: 10px; text-align: center; padding: 20px 0;}
+.forecast .day div{ font-size: 18px;}
+.forecast .day .date{height: 45px; line-height: 45px;}
+.forecast .day .week{height: 35px; line-height: 35px; font-size: 14px;}
+.forecast .day .wicon{height: 60px; line-height: 60px; margin-top: 15px;}
+.forecast .day .direct{height: 40px; line-height: 40px; font-size: 16px;}
+.forecast .day .wind{height: 40px; line-height: 40px; font-size: 16px;}
+.forecast .day .wdesc{height: 40px; line-height: 40px; font-size: 16px;}
+.forecast .day .temp{height: 40px; line-height: 40px; font-size: 16px;}
+
+.hour6 .hour{width: 290px; background: #4487ae; height: 128px; float: left; margin-left: 18px; margin-top: 10px;}
+.hour6 .hour .time{height: 52px; line-height: 52px; font-size: 14px; text-align: center; padding-left: 50px;}
+.hour6 .hour dt{float: left;height: 62px; line-height: 62px; padding-top: 14px; margin-left: 60px;}
+.hour6 .hour dd{height: 38px; line-height: 38px; padding-left: 130px;}
+
+.h6{background: url("../images/forecast/h06.png") 40px center no-repeat;}
+.h12{background: url("../images/forecast/h12.png") 40px center no-repeat;}
+.h18{background: url("../images/forecast/h18.png") 40px center no-repeat;}
+.h24{background: url("../images/forecast/h24.png") 40px center no-repeat;}
+
+
+.hour3{margin-top: 20px;background: #65b6e6 url("/IntegratedForecast/style/img/hour3_bg.png") no-repeat;}
+.hour3 .row{overflow: hidden;}
+.hour3 .row img{height: 32px;}
+.hour3 .row div{width: 125px; height: 41px; line-height: 41px; float: left; text-align: center; font-size: 14px;}
+.hour3 .first div{height: 52px; line-height: 52px; font-size: 18px;}
+.hour3 .row div.label{width: 136px; padding-left:80px; text-align: left;}
+.hour3 .second div img{margin-top: 3px;}
+.hour3 .row .h3_tqxx{background: url("../img/tqxx.png") 40px center no-repeat;}
+.hour3 .row .h3_wd{background: url("../img/wd.png") 40px center no-repeat;}
+.hour3 .row .h3_js{background: url("../img/js.png") 40px center no-repeat;}
+.hour3 .row .h3_fl{background: url("../img/fl.png") 40px center no-repeat;}
+.hour3 .row .h3_fx{background: url("../img/fx.png") 40px center no-repeat;}
+.hour3 .row .h3_qy{background: url("../images/forecast/qy.png") 40px center no-repeat;}
+.hour3 .row .h3_xdsd{background: url("../img/xdsd.png") 40px center no-repeat;}
+.hour3 .row .h3_yl{background: url("../images/forecast/yl.png") 40px center no-repeat;}
+.hour3 .row .h3_njd{background: url("../images/forecast/njd.png") 40px center no-repeat;}
+
+
+.tabchar{padding: 0 382px; margin: 40px 0 20px; overflow: hidden;}
+.tabchar li{float: left;}
+.tabchar a{display:block; width: 217px; height: 50px; line-height: 50px; color: #fff; font-size: 18px; text-align: center; font-weight: bold; text-decoration: none; outline:none;}
+.tabchar .wdqx{background: url("../images/forecast/wdqx.png") no-repeat;}
+.tabchar .wdqx a{ width: 187px; padding-right: 30px;}
+.tabchar .wdqx a:hover,.tabchar .wdqx a.actived{background: url("../images/forecast/wdqx_actived.png") no-repeat;}
+/* .tabchar .jsqx{background: url("../images/forecast/jsqx.png") no-repeat;}
+.tabchar .jsqx a:hover,.tabchar .jsqx a.actived{background: url("../images/forecast/jsqx_actived.png") no-repeat;} */
+.tabchar .jsqx{background: url("../images/forecast/radar.png") no-repeat;}
+.tabchar .jsqx a:hover,.tabchar .jsqx a.actived{background: url("../images/forecast/radar_actived.png") no-repeat;}
+.tabcontent #tempchart,.tabcontent #hoursb,.tabcontent #hours{width: 1216px; height: 400px; margin: 10px 0;}
+#hours_title{text-align: center; background: #fff; padding-top: 10px; color: #000;}
+.tabcontent #hours{margin: 0; height: 370px;}
+.tabcontent #radar { margin: 10px 0; display: none;}  
+#radar{text-align: center;}
+.tabcontent #radar img{height: 400px;}
+
+.qhbj{text-align: center;}
+.qhbj img{width: 1216px;}
+
+
+.follow{background: url("../images/forecast/follow_bg.png") no-repeat; height: 163px; position: relative;}
+.follow .row{height: 52px; overflow: hidden;}
+.follow .row div{float:left; height: 52px; line-height: 52px; text-align: center; font-size: 14px;}
+.follow .first div{color: #fff;}
+.follow .cname{width: 88px;}
+.follow .cname a{color:#fff;}
+.follow .rtemp{width: 90px; color: #f78724;}
+.follow .tday,.follow .tomday{width: 182px; padding: 0 10px;}
+.follow .row .wicon{width: 78px; margin-top: 14px; height: 39px; line-height: 39px;}
+.follow .row .wicon img{margin-right: 5px;}
+.follow .row .temp{margin-left: 10px;}
+#weather2 .tomday,#weather4 .tomday{ margin-left: 30px;}
+
+.mtemp{ color: #2685b9;}
+.ltemp{ color: #f78724;}
+#citySelector{right: 0; top: 0; left: auto;}
+
+.footer{margin-top: 40px;}
+.footer ul li a,.footer p{color: #fff;}
+
+
+#realTemperature,#realHumidity,#realRain,#realFeelst,#aqi span{font-size: 34px;}
+#realWindDirect,#realWindPower{font-size: 30px;}
+
+.nav_menu{width:100%; height:43px; line-height:43px; background:url(../img/navbg.png) repeat-x top;position:relative; z-index:1; font-family:'microsoft yahei'; margin:0px auto;  }
+.nav{ width:1024px; height:43px; line-height:43px; background:url(../img/navbg.png) repeat-x top;position:relative; z-index:1; font-family:'microsoft yahei'; margin:0px auto;  }
+.nav a{ color:#fff; text-align:center; }
+.nav .nLi{ float:left;  position:relative; display:inline;  }
+.nav .nLi h3{ float:left;  }
+.nav .nLi h3 a{ display:block; padding:0 18px; font-size:18px; font-weight:normal; background:url(../images/line.jpg) no-repeat right top; min-width:140px;  }
+.nav .sub{ display:none; width:140px; left:0; top:44px;position:absolute; background:#003c9f;line-height:32px; margin-left:15px; padding:5px 0;  }
+.nav .sub li{ zoom:1; border-bottom:solid 1px #2c5fae; }
+.nav .sub a{ display:block; padding:0 10px; font-size:14px;}
+.nav .sub a:hover{ background:003c9f; color:#faeb00;  }
+.nav .on h3 a{  color:#eaff00;   }
+.nav li.index h3{ width:140px;color:#faeb00;}
+.nav li.index h3 a{ display:block;background:url(../img/line.jpg) no-repeat right top; font-size:18px; color:#faeb00; text-align:center; font-weight:normal; padding:0px;} 
+.nav li.index h3 a:hover{ color:#faeb00;  }
+.nav .nlast h3 a{ background:none;}
+
+
+.expire{
+	color:#ccc;
+}
+/* .imgexpire{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+} */
+
+
+
+
+//
+// Navbars
+// --------------------------------------------------
+
+// Wrapper and base class
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+
+.navbar {
+  font-size: floor((@component-font-size-base * 1.067)); // ~16px
+  min-height: @navbar-height-base;
+  margin-bottom: @navbar-margin-bottom;
+  border: none;
+  border-radius: @navbar-border-radius;
+}
+
+// Navbar heading
+//
+// Groups `.navbar-brand` and `.navbar-toggle` into a single component for easy
+// styling of responsive aspects.
+
+.navbar-header {
+  @media (min-width: @grid-float-breakpoint) {
+    float: left;
+  }
+}
+
+// Navbar collapse (body)
+//
+// Group your navbar content into this for easy collapsing and expanding across
+// various device sizes. By default, this content is collapsed when <768px, but
+// will expand past that for a horizontal display.
+//
+// To start (on mobile devices) the navbar links, forms, and buttons are stacked
+// vertically and include a `max-height` to overflow in case you have too much
+// content for the user's viewport.
+
+.navbar-collapse {
+  box-shadow: none;
+  padding-right: 21px;
+  padding-left: 21px;
+
+  .navbar-form:first-child {
+    border:none;
+  }
+  @media (min-width: @grid-float-breakpoint) {
+    // Account for first and last children spacing
+    .navbar-nav.navbar-left:first-child {
+      margin-left: -21px;
+
+      > li:first-child a {
+        .border-left-radius(@navbar-border-radius);
+      }
+    }
+    .navbar-nav.navbar-right:last-child {
+      margin-right: -21px;
+
+      > .dropdown:last-child > a {
+        border-radius: 0 @navbar-border-radius @navbar-border-radius 0;
+      }
+    }
+    .navbar-form.navbar-right:last-child {
+      .navbar-fixed-top &,
+      .navbar-fixed-bottom & {
+        margin-right: 0;
+      }
+    }
+  }
+  @media (max-width: @grid-float-breakpoint-max) {
+    .navbar-nav.navbar-right:last-child {
+      margin-bottom: 3px;
+    }
+  }
+}
+
+// Both navbar header and collapse
+//
+// When a container is present, change the behavior of the header and collapse.
+
+.navbar {
+  .container,
+  .container-fluid {
+    padding-left: 21px;
+    padding-right: 21px;
+
+    > .navbar-header,
+    > .navbar-collapse {
+      margin-right: -21px;
+      margin-left:  -21px;
+
+      @media (min-width: @grid-float-breakpoint) {
+        margin-right: 0;
+        margin-left:  0;
+      }
+    }
+  }
+}
+
+//
+// Navbar alignment options
+//
+// Display the navbar across the entirety of the page or fixed it to the top or
+// bottom of the page.
+
+// Static top (unfixed, but 100% wide) navbar
+.navbar-static-top {
+  z-index: @zindex-navbar;
+  border-width: 0;
+  border-radius: 0;
+}
+
+// Fix the top/bottom navbars when screen real estate supports it
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  z-index: @zindex-navbar-fixed;
+  border-radius: 0;
+}
+.navbar-fixed-top {
+  border-width: 0;
+}
+.navbar-fixed-bottom {
+  margin-bottom: 0; // override .navbar defaults
+  border-width: 0;
+}
+
+// Brand/project name
+
+.navbar-brand {
+  font-size: floor((@component-font-size-base * 1.6)); // ~24px
+  line-height: 1.042;  // ~25px
+  height: @navbar-height-base;
+  font-weight: 700;
+  padding: ((@navbar-height-base - 25px) / 2) 21px;
+
+  > [class*="fui-"] {
+    font-size: floor((@component-font-size-base * 1.267)); // ~19px
+    line-height: 1.263; // ~24px
+    vertical-align: top;
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    .navbar > .container &,
+    .navbar > .container-fluid & {
+      margin-left: -21px;
+    }
+  }
+}
+
+// Navbar toggle
+//
+// Custom button for toggling the `.navbar-collapse`, powered by the collapse
+// JavaScript plugin.
+
+.navbar-toggle {
+  border: none;
+  color: @brand-primary;
+  margin: 0 0 0 21px;
+  padding: 0 21px;
+  height: @navbar-height-base;
+  line-height: @navbar-height-base;
+
+  &:before {
+    color: @link-color;
+    content: "\e61a";
+    font-family: "Flat-UI-Icons";
+    font-size: floor((@component-font-size-base * 1.467)); // ~22px
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: color .25s linear;
+  }
+  &:hover,
+  &:focus {
+    outline: none;
+
+    &:before {
+      color: @link-hover-color;
+    }
+  }
+  .icon-bar {
+    display: none;
+  }
+
+  @media (min-width: @grid-float-breakpoint) {
+    display: none;
+  }
+}
+

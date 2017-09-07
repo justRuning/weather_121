@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.context.annotation.Lazy;
+
 @Entity
 public class Forecast {
 
@@ -24,10 +26,10 @@ public class Forecast {
 	private Date beginTime;
 	private int hour;
 	private int age;
-	private String highTem;
-	private String lowTem;
-	private String highTemRevised;
-	private String lowTemRevised;
+	private String maxTemp;
+	private String minTemp;
+	private String maxTempRevised;
+	private String minTempRevised;
 	private String windDirectionDay;
 	private String windVelocityDay;
 	private String windDirectionNight;
@@ -45,8 +47,8 @@ public class Forecast {
 	@Override
 	public String toString() {
 		return "Forecast [id=" + id + ", station=" + station + ", forecastType=" + forecastType + ", beginTime="
-				+ beginTime + ", hour=" + hour + ", age=" + age + ", highTem=" + highTem + ", lowTem=" + lowTem
-				+ ", highTemRevised=" + highTemRevised + ", lowTemRevised=" + lowTemRevised + ", windDirectionDay="
+				+ beginTime + ", hour=" + hour + ", age=" + age + ", maxTemp=" + maxTemp + ", minTemp=" + minTemp
+				+ ", maxTempRevised=" + maxTempRevised + ", minTempRevised=" + minTempRevised + ", windDirectionDay="
 				+ windDirectionDay + ", windVelocityDay=" + windVelocityDay + ", windDirectionNight="
 				+ windDirectionNight + ", windVelocityNight=" + windVelocityNight + ", RHDay=" + RHDay + ", RHNight="
 				+ RHNight + ", rainDay=" + rainDay + ", rainNight=" + rainNight + ", skyDay=" + skyDay + ", skyNight="
@@ -101,36 +103,36 @@ public class Forecast {
 		this.age = age;
 	}
 
-	public String getHighTem() {
-		return highTem;
+	public String getMaxTemp() {
+		return maxTemp;
 	}
 
-	public void setHighTem(String highTem) {
-		this.highTem = highTem;
+	public void setMaxTemp(String maxTemp) {
+		this.maxTemp = maxTemp;
 	}
 
-	public String getLowTem() {
-		return lowTem;
+	public String getMinTemp() {
+		return minTemp;
 	}
 
-	public void setLowTem(String lowTem) {
-		this.lowTem = lowTem;
+	public void setMinTemp(String minTemp) {
+		this.minTemp = minTemp;
 	}
 
-	public String getHighTemRevised() {
-		return highTemRevised;
+	public String getMaxTempRevised() {
+		return maxTempRevised;
 	}
 
-	public void setHighTemRevised(String highTemRevised) {
-		this.highTemRevised = highTemRevised;
+	public void setMaxTempRevised(String maxTempRevised) {
+		this.maxTempRevised = maxTempRevised;
 	}
 
-	public String getLowTemRevised() {
-		return lowTemRevised;
+	public String getMinTempRevised() {
+		return minTempRevised;
 	}
 
-	public void setLowTemRevised(String lowTemRevised) {
-		this.lowTemRevised = lowTemRevised;
+	public void setMinTempRevised(String minTempRevised) {
+		this.minTempRevised = minTempRevised;
 	}
 
 	public String getWindDirectionDay() {
@@ -212,5 +214,7 @@ public class Forecast {
 	public void setSkyNight(String skyNight) {
 		this.skyNight = skyNight;
 	}
+
+	
 
 }

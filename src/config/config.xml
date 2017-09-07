@@ -1,1 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<student>
+		<name>产品路径</name>
+		<value>E:\\公共气象服务平台\\</value>
+	</student>
+	<student>
+		<name>短信路径</name>
+		<value>D:\\bmdx\\</value>
+	</student>
+	<student>
+		<name>12121路径</name>
+		<value>C:\\manager\\boxtxt121\\</value>
+	</student>
+</root>

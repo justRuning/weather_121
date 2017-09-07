@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.hebj.forecast.util.Helper;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class WeatherActual {
@@ -15,16 +15,21 @@ public class WeatherActual {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
+	@ManyToOne
+	@JoinColumn
+	private Station station;
+
 	private String name;
 	private String stationID;
 	private Date time;
 	private int hour;
 	private String tem;
-	private String surfaceTem;
-	private String highTem;
-	private String lowTem;
-	private String highTem24;
-	private String lowTem24;
+	private String surfaceTemp;
+	private String maxTemp;
+	private String minTemp;
+	private String maxTemp24;
+	private String minTemp24;
 	private String relativeHumidity;
 	private String water;
 	private String water3;
@@ -44,10 +49,10 @@ public class WeatherActual {
 	@Override
 	public String toString() {
 		return "WeatherActual [id=" + id + ", name=" + name + ", stationID=" + stationID + ", time=" + time + ", hour="
-				+ hour + ", tem=" + tem + ", surfaceTem=" + surfaceTem + ", highTem=" + highTem + ", lowTem=" + lowTem
-				+ ", highTem24=" + highTem24 + ", lowTem24=" + lowTem24 + ", relativeHumidity=" + relativeHumidity
-				+ ", water=" + water + ", water3=" + water3 + ", water6=" + water6 + ", water12=" + water12
-				+ ", water24=" + water24 + ", windDirection2min=" + windDirection2min + ", windVelocity2min="
+				+ hour + ", tem=" + tem + ", surfaceTemp=" + surfaceTemp + ", maxTemp=" + maxTemp + ", minTemp="
+				+ minTemp + ", maxTemp24=" + maxTemp24 + ", minTemp24=" + minTemp24 + ", relativeHumidity="
+				+ relativeHumidity + ", water=" + water + ", water3=" + water3 + ", water6=" + water6 + ", water12="
+				+ water12 + ", water24=" + water24 + ", windDirection2min=" + windDirection2min + ", windVelocity2min="
 				+ windVelocity2min + ", windDirection10min=" + windDirection10min + ", windVelocity10min="
 				+ windVelocity10min + ", barometricPressure=" + barometricPressure + ", visibility=" + visibility + "]";
 	}
@@ -58,6 +63,14 @@ public class WeatherActual {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Station getStation() {
+		return station;
+	}
+
+	public void setStation(Station station) {
+		this.station = station;
 	}
 
 	public String getName() {
@@ -100,44 +113,44 @@ public class WeatherActual {
 		this.tem = tem;
 	}
 
-	public String getSurfaceTem() {
-		return surfaceTem;
+	public String getSurfaceTemp() {
+		return surfaceTemp;
 	}
 
-	public void setSurfaceTem(String surfaceTem) {
-		this.surfaceTem = surfaceTem;
+	public void setSurfaceTemp(String surfaceTemp) {
+		this.surfaceTemp = surfaceTemp;
 	}
 
-	public String getHighTem() {
-		return highTem;
+	public String getMaxTemp() {
+		return maxTemp;
 	}
 
-	public void setHighTem(String highTem) {
-		this.highTem = highTem;
+	public void setMaxTemp(String maxTemp) {
+		this.maxTemp = maxTemp;
 	}
 
-	public String getLowTem() {
-		return lowTem;
+	public String getMinTemp() {
+		return minTemp;
 	}
 
-	public void setLowTem(String lowTem) {
-		this.lowTem = lowTem;
+	public void setMinTemp(String minTemp) {
+		this.minTemp = minTemp;
 	}
 
-	public String getHighTem24() {
-		return highTem24;
+	public String getMaxTemp24() {
+		return maxTemp24;
 	}
 
-	public void setHighTem24(String highTem24) {
-		this.highTem24 = highTem24;
+	public void setMaxTemp24(String maxTemp24) {
+		this.maxTemp24 = maxTemp24;
 	}
 
-	public String getLowTem24() {
-		return lowTem24;
+	public String getMinTemp24() {
+		return minTemp24;
 	}
 
-	public void setLowTem24(String lowTem24) {
-		this.lowTem24 = lowTem24;
+	public void setMinTemp24(String minTemp24) {
+		this.minTemp24 = minTemp24;
 	}
 
 	public String getRelativeHumidity() {
@@ -205,7 +218,7 @@ public class WeatherActual {
 	}
 
 	public String getWindDirection10min() {
-		return Helper.wind2String(windDirection10min);
+		return windDirection10min;
 	}
 
 	public void setWindDirection10min(String windDirection10min) {
@@ -236,5 +249,4 @@ public class WeatherActual {
 		this.visibility = visibility;
 	}
 
-	
 }
