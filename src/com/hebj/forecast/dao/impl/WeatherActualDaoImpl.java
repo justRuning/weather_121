@@ -154,6 +154,7 @@ public class WeatherActualDaoImpl implements WeatherActualDao {
 			e.printStackTrace();
 		}
 		params[2] = hour;
+		hibernateTemplate.setMaxResults(20);
 		List<?> list = hibernateTemplate.find(hql, params);
 		if (list.size() < 1) {
 			return null;

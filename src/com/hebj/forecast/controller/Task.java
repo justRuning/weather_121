@@ -88,6 +88,14 @@ public class Task {
 
 	}
 
+	@Scheduled(cron = "0 10 7 * * ?")
+	public void zaoJian() {
+
+		ZaoJian zaoJian = zaoJianService.makeZaoJian();
+		zaoJianService.sava(zaoJian);
+
+	}
+
 	/**
 	 * 天气预报入库
 	 */
@@ -103,11 +111,7 @@ public class Task {
 				String result = forecastService.readForecast(calendar.getTime(), hours, "local");
 				if (result != null) {
 					forecastService.makeYYmsg();
-					if (hours == 6) {
-						ZaoJian zaoJian = zaoJianService.makeZaoJian();
-						zaoJianService.sava(zaoJian);
-					} else if (hours == 16) {
-
+					if (hours == 16) {
 						forecastService.makeForecastMsg();
 
 						AllMsg allMsg = allMsgService.makeAllMsg();

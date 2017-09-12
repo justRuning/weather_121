@@ -65,7 +65,7 @@ public class ForecastHelper {
 
 			if (forecast.getStation().getStationName().equals("后旗")) {
 
-				String[] ShanHouTemp = getShanHouTemp();
+				String[] ShanHouTemp = getShanHouTemp(true);
 				string = String.format("巴市气象台%s日下午发布%s天气预报：今晚到明天%s,%s,巴音镇%s到%s度，山后%s到%s度。",
 						calendar.get(Calendar.DAY_OF_MONTH), forecast.getStation().getStationName(),
 						forecast.getSkyDay(), forecast.getWindDirectionDay(), forecast.getMinTemp(),
@@ -86,7 +86,7 @@ public class ForecastHelper {
 		return weathers;
 	}
 
-	public static String[] getShanHouTemp() {
+	public static String[] getShanHouTemp(boolean today) {
 
 		String JDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		String connectDB = "jdbc:sqlserver://172.18.132.7;DatabaseName=YBPF";
@@ -137,7 +137,10 @@ public class ForecastHelper {
 				// rs.getString("预报时限") + "\t" + rs.getString("预报站点")
 				// + "\t" + rs.getString("天气形式") + "\t" + rs.getString("最低气温") +
 				// "\t" + rs.getString("最高气温"));
-				if (date.equals(rs.getString("发布日期"))) {
+				if (!today) {
+					result[0] = rs.getString("最低气温");
+					result[1] = rs.getString("最高气温");
+				} else if (date.equals(rs.getString("发布日期"))) {
 					result[0] = rs.getString("最低气温");
 					result[1] = rs.getString("最高气温");
 				}
@@ -359,9 +362,21 @@ public class ForecastHelper {
 						"听众朋友您好\r\n、\r\n今天是\r\n%s月\r\n、\r\n%s日\r\n、\r\n%s\r\n下面向您播送今天%s%s点\r\n、\r\n发布的\r\n天气预报\r\n、\r\n今天%s\r\n、\r\n全市\r\n、\r\n%s\r\n、\r\n北部\r\n%s级\r\n、\r\n河套地区\r\n%s级\r\n、\r\n%s风\r\n、\r\n%s\r\n、\r\n%s\r\n、\r\n气温\r\n、\r\n%s到\r\n%s℃\r\n、\r\n欢迎收听其他气象信息",
 						calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH),
 						Helper.getDayOfWeek(calendar.getTime()), hour, forecast.getHour(), time2, forecast.getSkyDay(),
-						wind, wind2, winds.get(0), forecast.getStation().getStationName(), forecast.getSkyDay(),
+						wind2, wind, winds.get(0), forecast.getStation().getStationName(), forecast.getSkyDay(),
 						forecast.getMinTemp(), forecast.getMaxTemp());
 				weathers.put(forecast.getStation().getStationName(), string);
+			} else if (forecast.getStation().getStationName().equals("后旗")) {
+				String[] ShanHouTemp = getShanHouTemp(false);
+				String string = String.format(
+						"下面向您播送今天%s%s点\r\n发布的\r\n%s\r\n天气预报\r\n、\r\n今天%s\r\n、\r\n%s\r\n、\r\n%s级\r\n、\r\n%s风\r\n、\r\n气温\r\n、\r\n前山地区\r\n、\r\n%s到\r\n%s℃\r\n、\r\n后山地区\r\n、\r\n%s到\r\n%s℃\r\n、\r\n欢迎收听其他气象信息",
+						hour, forecast.getHour(), forecast.getStation().getStationName(), time2, forecast.getSkyDay(),
+						wind2, winds.get(0), forecast.getMinTemp(), forecast.getMaxTemp(), ShanHouTemp[0],
+						ShanHouTemp[1]);
+				string = string.replace("4到5", "5到6");
+				string = string.replace("3到4", "4到5");
+				string = string.replace("2到3", "3到4");
+				weathers.put(forecast.getStation().getStationName(), string);
+
 			} else {
 				String string = String.format(
 						"下面向您播送今天%s%s点\r\n发布的\r\n%s\r\n天气预报\r\n、\r\n今天%s\r\n、\r\n%s\r\n、\r\n%s级\r\n、\r\n%s风\r\n、\r\n气温\r\n、\r\n%s到\r\n%s℃\r\n、\r\n欢迎收听其他气象信息",
@@ -372,6 +387,7 @@ public class ForecastHelper {
 		}
 
 		return weathers;
+
 	}
 
 	/**

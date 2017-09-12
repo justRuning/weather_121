@@ -28,6 +28,7 @@
 
 package com.hebj.forecast.controller;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -123,7 +124,9 @@ public class Controller {
 	public String scssZaojian(@RequestParam(value = "content", required = true) String content) {
 
 		ZaoJian zaoJian = new ZaoJian();
-
+		Calendar calendar = Calendar.getInstance();
+		zaoJian.date = new Date(calendar.get(Calendar.YEAR) - 1900, calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH));
 		zaoJian.content = content;
 		zaoJianService.sava(zaoJian);
 
@@ -136,6 +139,9 @@ public class Controller {
 	public String scssAllMsg(@RequestParam(value = "content", required = true) String content) {
 
 		AllMsg allMsg = new AllMsg();
+		Calendar calendar = Calendar.getInstance();
+		allMsg.date = new Date(calendar.get(Calendar.YEAR) - 1900, calendar.get(Calendar.MONTH),
+				calendar.get(Calendar.DAY_OF_MONTH));
 		allMsg.content = content;
 		allMsgService.sava(allMsg);
 
@@ -239,7 +245,8 @@ public class Controller {
 
 		ZaoJian zaoJian = new ZaoJian();
 		zaoJian = zaoJianService.getZaoJian(date);
-		if (calendar.get(Calendar.DAY_OF_MONTH) == 7) {
+		int i = calendar.get(Calendar.HOUR_OF_DAY);
+		if (calendar.get(Calendar.HOUR_OF_DAY) == 7) {
 			zaoJian = zaoJianService.makeZaoJian();
 		}
 

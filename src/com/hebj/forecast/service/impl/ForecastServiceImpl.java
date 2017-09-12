@@ -79,8 +79,10 @@ public class ForecastServiceImpl implements ForecastService {
 		calendar.setTime(forecasts.get(0).getBeginTime());
 		int h = forecasts.get(0).getHour();
 		String hour = "";
-		if (h <= 11) {
+		if (h <= 8) {
 			hour = "早上";
+		} else if (h <= 12) {
+			hour = "上午";
 		} else if (h <= 15) {
 			hour = "中午";
 		} else if (h <= 17) {
