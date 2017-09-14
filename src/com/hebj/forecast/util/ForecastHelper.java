@@ -345,7 +345,7 @@ public class ForecastHelper {
 	public static Map<String, String> getYYMsg(List<Forecast> forecasts, String hour) {
 
 		String time2 = null;
-		if (hour == "早上" || hour == "中午") {
+		if (hour == "早上" || hour == "上午" || hour == "中午") {
 			time2 = "白天到夜间";
 		} else {
 			time2 = "夜间到明天白天";
