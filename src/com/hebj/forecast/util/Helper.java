@@ -155,6 +155,11 @@ public class Helper {
 					list.add(strings[0]);
 					list.add(strings[1]);
 					return list;
+				} else if (liStrings[0].contains("-")) {
+					String[] strings = liStrings[0].split("风");
+					list.add(strings[0]);
+					list.add(liStrings[1]);
+					return list;
 				} else {
 					String[] strings = liStrings[1].split("风");
 					list.add(liStrings[0]);
