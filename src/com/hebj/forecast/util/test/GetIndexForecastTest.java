@@ -12,7 +12,7 @@ public class GetIndexForecastTest {
 
 	@Test
 	public void test() {
-		Map<String, String> indexForecast = GetIndexForecast.getWeatherWeb();
+		Map<String, String> indexForecast = GetIndexForecast.getIndex();
 		GetIndexForecast indexForecast2 = new GetIndexForecast();
 		try {
 			indexForecast2.writeIndexForecast(indexForecast);

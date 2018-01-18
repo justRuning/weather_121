@@ -28,8 +28,10 @@
 
 package com.hebj.forecast.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -202,6 +204,56 @@ public class Controller {
 		List<Forecast> forecasts = forecastService.getLastForecast();
 		String time;
 		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月d日");
+		time = dateFormat.format(forecasts.get(0).getBeginTime());
+		time = time + forecasts.get(0).getHour() + "时";
+
+		model.addObject("time", time);
+
+		return model;
+	}
+
+	/**
+	 * 手动更新预报
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/reload")
+	public ModelAndView reload() {
+
+		Calendar calendar = Calendar.getInstance();
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd-HH-mm");
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		if (hours < 10) {
+			hours = 6;
+		} else if (hours < 15) {
+			hours = 10;
+		} else {
+			hours = 16;
+		}
+
+		try {
+			String result = forecastService.readForecast(calendar.getTime(), hours, "local");
+			if (result != null) {
+				forecastService.makeYYmsg();
+				if (hours == 16) {
+					forecastService.makeForecastMsg();
+
+					AllMsg allMsg = allMsgService.makeAllMsg();
+					allMsgService.sava(allMsg);
+
+					Fire fire = fireService.makeFire();
+					fireService.sava(fire);
+				}
+			}
+		} catch (IOException | ParseException e) {
+			System.out.println("本地预报入库失败，时间：" + dateFormat.format(calendar.getTime()) + hours);
+		}
+
+		ModelAndView model = new ModelAndView("index.jsp");
+
+		List<Forecast> forecasts = forecastService.getLastForecast();
+		String time;
+		dateFormat = new SimpleDateFormat("yyyy年MM月d日");
 		time = dateFormat.format(forecasts.get(0).getBeginTime());
 		time = time + forecasts.get(0).getHour() + "时";
 
@@ -505,6 +557,13 @@ public class Controller {
 		ModelAndView model = new ModelAndView("shikuang.jsp");
 
 		return model;
+	}
+
+	@RequestMapping("/makeYYWeather")
+	public ModelAndView makeYYWeather() {
+		weatherActualservice.make121Weather();
+
+		return null;
 	}
 
 	@RequestMapping("/indexForecast")

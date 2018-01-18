@@ -3,6 +3,13 @@ package com.hebj.forecast.dao.impl;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Properties;
 
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -952,6 +959,109 @@ public class GetForecastImpl implements GetForecast {
 		}
 
 		return forecasts;
+	}
+
+	@Override
+	public List<Forecast> getLocalForecast2(Date time, int hour) {
+
+		List<Forecast> forecasts = new ArrayList<Forecast>();
+		String line = null;
+		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(time);
+		calendar.add(Calendar.HOUR_OF_DAY, -12);
+		int second = hour == 16 ? 7 : 5;
+		DateFormat dateFormat = new SimpleDateFormat("dd");
+		NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication("", "administrator", "123");
+		String filePath = "smb://172.18.132.45/forecast/ForeCast.mdb";
+		SmbFile smbFile;
+
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+		} catch (ClassNotFoundException cnfex) {
+
+			System.out.println("Problem in loading or " + "registering MS Access JDBC driver");
+			cnfex.printStackTrace();
+		}
+
+		try {
+
+			String msAccDB = "/home/hebj/Documents/ForeCast.mdb";
+			String dbURL = "jdbc:ucanaccess://" + msAccDB;
+
+			// Step 2.A: Create and get connection using DriverManager class
+			connection = DriverManager.getConnection(dbURL);
+
+			// Step 2.B: Creating JDBC Statement
+			statement = connection.createStatement();
+
+			// Step 2.C: Executing SQL &amp; retrieve data into ResultSet
+			resultSet = statement.executeQuery("SELECT * FROM PLAYER");
+
+			System.out.println("ID\tName\t\t\tAge\tMatches");
+			System.out.println("==\t================\t===\t=======");
+
+			// processing returned data and printing into console
+			while (resultSet.next()) {
+				System.out.println(resultSet.getInt(1) + "\t" + resultSet.getString(2) + "\t" + resultSet.getString(3)
+						+ "\t" + resultSet.getString(4));
+			}
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+
+			// Step 3: Closing database connection
+			try {
+				if (null != connection) {
+
+					// cleanup resources, once after processing
+					resultSet.close();
+					statement.close();
+
+					// and then finally close connection
+					connection.close();
+				}
+			} catch (SQLException sqlex) {
+				sqlex.printStackTrace();
+			}
+		}
+
+		// try {
+		// smbFile = new SmbFile(filePath, auth);
+		// Properties prop = new Properties();
+		// prop.put("charSet", "gb2312");
+		// prop.put("user", "");
+		// prop.put("password", "");
+		// String url = "jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=" +
+		// filePath;
+		// PreparedStatement ps = null;
+		// Statement stmt = null;
+		// ResultSet rs = null;
+		// if (smbFile.exists()) {
+		// try {
+		// Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+		// Connection conn = DriverManager.getConnection(url);
+		// stmt = (Statement) conn.createStatement();
+		//
+		// rs = stmt.executeQuery("select * from Chinese");
+		// ResultSetMetaData data = rs.getMetaData();
+		// } catch (ClassNotFoundException | SQLException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
+		//
+		// }
+		// } catch (MalformedURLException e) {
+		// e.printStackTrace();
+		// } catch (SmbException e) {
+		//
+		// }
+		return null;
 	}
 
 }

@@ -73,7 +73,7 @@ public class Task {
 	/**
 	 * 整点实况定时读取
 	 */
-	@Scheduled(cron = "0 15,25 16 * * ?")
+	@Scheduled(cron = "0 15 16 * * ?")
 	public void other() {
 
 		Map<String, String> indexForecast = GetIndexForecast.getIndex();

@@ -13,6 +13,8 @@ public interface GetForecast {
 	
 	List<Forecast> getIntegratedForecast(Date time,int hour);
 	List<Forecast> getLocalForecast(Date time, int hour) throws UnsupportedEncodingException, IOException;
+	
+	List<Forecast> getLocalForecast2(Date time, int hour) ;
 
 	List<Forecast> getT639Forecast(Date time, int hour) throws ParseException;
 

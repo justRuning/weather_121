@@ -13,9 +13,8 @@ public class ReadDataFromConfig {
 	public static String getValue(String name) throws JDOMException, IOException {
 		SAXBuilder sb = new SAXBuilder();
 		Document doc = null;
-		doc = sb.build("D://tomcat//webapps//weather_121//config/config.xml");
-		// doc
-		// =sb.build("/home/hebj/eclipse-workspace/weather_121/src/config/config.xml");
+		doc = sb.build("D:\\tomcat\\webapps\\weather_121\\WEB-INF\\classes\\config\\config.xml");
+		// doc =sb.build("/home/hebj/eclipse-workspace/weather_121/src/config/config.xml");
 
 		Element root = doc.getRootElement();
 		List list = root.getChildren();

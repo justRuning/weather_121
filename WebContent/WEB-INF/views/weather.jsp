@@ -84,7 +84,12 @@ ul.tab li a:focus, .active {
 		<li><a href="javascript:void(0)" class="tablinks"
 			onclick="openCity(event, 'weatherDiv')">天气实况</a></li>
 
+		<a
+			style="margin-right: 10px; width: 200px; height: 54px; float: right; overflow: hidden; font-size: 22px; "
+			href="./reload" class="btn btn-large btn-block btn-warning">更新预报</a>
 	</ul>
+
+
 
 	<div id="forecastDiv" class="tab1 forecastDiv">
 		<div id="forecastMap" style="width: 100%; height: 800px;"></div>

@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.poi.hwpf.HWPFDocument;
@@ -20,6 +22,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.mysql.jdbc.Field;
+import com.sun.mail.handlers.text_html;
 import com.sun.org.apache.regexp.internal.recompile;
 
 public class GetIndexForecast {
@@ -108,11 +111,12 @@ public class GetIndexForecast {
 			for (int i = 0; i < 6; i++) {
 				StringBuffer content = new StringBuffer();
 				Element element = links.get(i);
-				if (i == 2) {
+				if (element.toString().contains("a href")) {
 					element = element.getElementsByTag("a").first();
 				}
 				Elements element2 = element.getElementsByTag("em");
-				content.append(element2.get(0).text() + ":");
+				String[] txt = element2.get(0).text().split("·");
+				content.append(txt[txt.length - 1] + ":");
 				element2 = links.get(i).getElementsByTag("span");
 				content.append(element2.get(0).text().toString() + "\n");
 				element2 = links.get(i).getElementsByTag("p");
@@ -138,6 +142,8 @@ public class GetIndexForecast {
 		String paths = ReadDataFromConfig.getValue("产品路径");
 		String templatePath = paths + "//指数预报//模板.doc";
 
+		// String templatePath ="/home/hebj/Documents/模板.doc";
+
 		InputStream is = new FileInputStream(templatePath);
 		HWPFDocument doc = new HWPFDocument(is);
 		Range range = doc.getRange();
@@ -149,27 +155,57 @@ public class GetIndexForecast {
 		range.replaceText("time", time);
 
 		Set<String> keys = indexForecast.keySet();
-		for (String string : keys) {
-			if (string.contains("紫外线")) {
-				range.replaceText("ziwaixian", string);
-				range.replaceText("zwxtxt", indexForecast.get(string));
-			} else if (string.contains("感冒")) {
-				range.replaceText("ganmao", string);
-				range.replaceText("gmtxt", indexForecast.get(string));
-			} else if (string.contains("穿衣")) {
-				range.replaceText("chuanyi", string);
-				range.replaceText("cytxt", indexForecast.get(string));
-			} else if (string.contains("洗车")) {
-				range.replaceText("xiche", string);
-				range.replaceText("xctxt", indexForecast.get(string));
-			} else if (string.contains("运动")) {
-				range.replaceText("yundong", string);
-				range.replaceText("ydtxt", indexForecast.get(string));
-			} else if (string.contains("空气")) {
-				range.replaceText("kongqi", string);
-				range.replaceText("kqtxt", indexForecast.get(string));
-			}
+
+		int i = 1;
+		for (Entry<String, String> entry : indexForecast.entrySet()) {
+			String[] keys1 = entry.getKey().split("·");
+			range.replaceText("key" + i, keys1[keys1.length - 1]);
+			range.replaceText("value" + i, entry.getValue());
+			i++;
 		}
+		// for (String string : keys) {
+		// if (string.contains("紫外线")) {
+		// range.replaceText("ziwaixian", string);
+		// range.replaceText("zwxtxt", indexForecast.get(string));
+		// } else if (string.contains("感冒")) {
+		// range.replaceText("ganmao", string);
+		// range.replaceText("gmtxt", indexForecast.get(string));
+		// } else if (string.contains("穿衣")) {
+		// range.replaceText("chuanyi", string);
+		// range.replaceText("cytxt", indexForecast.get(string));
+		// } else if (string.contains("洗车")) {
+		// range.replaceText("xiche", string);
+		// range.replaceText("xctxt", indexForecast.get(string));
+		// } else if (string.contains("运动")) {
+		// range.replaceText("yundong", string);
+		// range.replaceText("ydtxt", indexForecast.get(string));
+		// } else if (string.contains("空气")) {
+		// range.replaceText("kongqi", string);
+		// range.replaceText("kqtxt", indexForecast.get(string));
+		// }
+		// }
+		//
+		// for (String string : keys) {
+		// if (string.contains("紫外线")) {
+		// range.replaceText("ziwaixian", string);
+		// range.replaceText("zwxtxt", indexForecast.get(string));
+		// } else if (string.contains("感冒")) {
+		// range.replaceText("ganmao", string);
+		// range.replaceText("gmtxt", indexForecast.get(string));
+		// } else if (string.contains("穿衣")) {
+		// range.replaceText("chuanyi", string);
+		// range.replaceText("cytxt", indexForecast.get(string));
+		// } else if (string.contains("洗车")) {
+		// range.replaceText("xiche", string);
+		// range.replaceText("xctxt", indexForecast.get(string));
+		// } else if (string.contains("运动")) {
+		// range.replaceText("yundong", string);
+		// range.replaceText("ydtxt", indexForecast.get(string));
+		// } else if (string.contains("空气")) {
+		// range.replaceText("kongqi", string);
+		// range.replaceText("kqtxt", indexForecast.get(string));
+		// }
+		// }
 
 		df = new SimpleDateFormat("yyyyMMdd");
 		String strDate = df.format(calendar.getTime());
@@ -177,6 +213,7 @@ public class GetIndexForecast {
 		String strYear = df.format(calendar.getTime());
 
 		String filePath = paths + "指数预报\\" + strYear + "\\";
+		// String filePath = "/home/hebj/Documents/" + strYear + "//";
 		File file = new File(filePath + "指数预报" + strDate + ".doc");
 		if (!file.exists()) {
 			File path = new File(filePath);
