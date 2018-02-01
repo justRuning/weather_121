@@ -372,9 +372,9 @@ public class ForecastHelper {
 						hour, forecast.getHour(), forecast.getStation().getStationName(), time2, forecast.getSkyDay(),
 						wind2, winds.get(0), forecast.getMinTemp(), forecast.getMaxTemp(), ShanHouTemp[0],
 						ShanHouTemp[1]);
-				string = string.replace("4到5", "5到6");
-				string = string.replace("3到4", "4到5");
-				string = string.replace("2到3", "3到4");
+				// string = string.replace("4到5", "5到6");
+				// string = string.replace("3到4", "4到5");
+				// string = string.replace("2到3", "3到4");
 				weathers.put(forecast.getStation().getStationName(), string);
 
 			} else {
