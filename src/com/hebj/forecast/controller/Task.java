@@ -50,11 +50,11 @@ public class Task {
 	/**
 	 * 整点实况定时读取
 	 */
-	@Scheduled(cron = "0 5,7,10,15 * * * ?")
+	@Scheduled(cron = "3 5,7,10,15 * * * ?")
 	public void weahterAct() {
 
 		Calendar calendar = Calendar.getInstance();
-		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd-HH-mm");
+//		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd-HH-mm");
 		String msg;
 		try {
 			msg = weatherActualService.readWeather(calendar.getTime());
@@ -65,7 +65,7 @@ public class Task {
 			}
 			logger.info(msg);
 		} catch (IOException | ParseException e) {
-			logger.error("读取实况出错，时间：" + dateFormat.format(calendar.getTime()));
+			e.printStackTrace();
 		}
 
 	}
@@ -73,7 +73,7 @@ public class Task {
 	/**
 	 * 整点实况定时读取
 	 */
-	@Scheduled(cron = "0 15 16 * * ?")
+	@Scheduled(cron = "0 10,15 15,16 * * ?")
 	public void other() {
 
 		Map<String, String> indexForecast = GetIndexForecast.getIndex();
@@ -99,14 +99,14 @@ public class Task {
 	/**
 	 * 天气预报入库
 	 */
-	@Scheduled(cron = "0 15,16,17,18,19,20,21,22,23,24,25,28,30,50 6,10,16 * * ?")
+	@Scheduled(cron = "0 0,10,13,15,16,17,18,19,20,21,22,23,24,25,28,30,40,48,50,55 6,10,15,16 * * ?")
 	public void localForecast() {
 
-		Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();//
 		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd-HH-mm");
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
 
-		if (hours == 6 || hours == 10 || hours == 16) {
+		if (hours == 6 || hours == 10 || hours == 16|| hours == 15) {
 			try {
 				String result = forecastService.readForecast(calendar.getTime(), hours, "local");
 				if (result != null) {

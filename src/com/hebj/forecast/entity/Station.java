@@ -29,7 +29,7 @@ public class Station {
 	private double longitude;
 	private double latitude;
 	private String city;
-	private Boolean readData;
+//	private Boolean readData;
 
 	public Station() {
 	};
@@ -41,7 +41,7 @@ public class Station {
 	@Override
 	public String toString() {
 		return "Station [id=" + id + ", stationId=" + stationId + ", stationName=" + stationName + ", longitude="
-				+ longitude + ", latitude=" + latitude + ", city=" + city + ", readData=" + readData + "]";
+				+ longitude + ", latitude=" + latitude + ", city=" + city + ", readData=]";
 	}
 
 	public int getId() {
@@ -84,13 +84,7 @@ public class Station {
 		this.latitude = latitude;
 	}
 
-	public Boolean getReadData() {
-		return readData;
-	}
 
-	public void setReadData(Boolean readData) {
-		this.readData = readData;
-	}
 
 	public String getCity() {
 		return city;
@@ -100,12 +94,5 @@ public class Station {
 		this.city = city;
 	}
 
-	public Boolean getRead() {
-		return readData;
-	}
-
-	public void setRead(Boolean readData) {
-		this.readData = readData;
-	}
 
 }

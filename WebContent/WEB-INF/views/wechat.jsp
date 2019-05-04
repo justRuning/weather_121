@@ -2,25 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
-
-
-
 <div>
 	<p
 		style="margin: 0; padding: 20px; font-size: 30px; text-align: center"
 		class="bg-success">微信专题制作预报图片</p>
 
 </div>
-
 <br>
 <br>
 <br>
-
-
 <div
-	style="width: 400px; text-align: center; margin-left: auto; margin-right: auto;">
+	style="width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
 
 	<table
 		class="table table-bordered table-hover table-condensed table-striped text-center">
@@ -36,7 +28,6 @@
 					</tr>
 				</thead>
 			</c:if>
-
 
 			<tbody>
 				<c:if test="${s.index%2==1}">
@@ -54,21 +45,4 @@
 
 		</c:forEach>
 	</table>
-
-
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

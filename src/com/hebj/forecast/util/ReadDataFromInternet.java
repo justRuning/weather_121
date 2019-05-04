@@ -4,13 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.hibernate.procedure.internal.Util.ResultClassesResolutionContext;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class ReadDataFromInternet {
@@ -113,13 +110,12 @@ public class ReadDataFromInternet {
 				+ "&LAND=CI&LANG=cn";
 		String userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36";
 		Document doc;
-		try{
+		try {
 			doc = Jsoup.connect(url).referrer(referer).userAgent(userAgent).ignoreContentType(true).get();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
-		
+
 		Elements links = doc.getElementsByTag("a");
 		String link = "http://www.t7online.com" + links.get(3).attr("onclick").split("'")[1];
 		return link;
@@ -130,8 +126,8 @@ public class ReadDataFromInternet {
 	 * 
 	 * @param url
 	 * @return
-	 * @throws IOException 
-	 * @throws UnsupportedEncodingException 
+	 * @throws IOException
+	 * @throws UnsupportedEncodingException
 	 */
 	public static String getHtmlContent(String url, String encoding) throws UnsupportedEncodingException, IOException {
 		if (url == null) {

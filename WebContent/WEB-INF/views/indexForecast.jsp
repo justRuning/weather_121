@@ -45,12 +45,12 @@
 	</p>
 	<p style='text-indent: 23.6pt'>
 		<strong
-			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'>巴彦淖尔市气象灾害防御中心</strong><strong
+			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'>巴彦淖尔市气象台</strong><strong
 			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'><SPAN
 			style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</SPAN></strong><strong
 			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'>签发：</strong><strong
-			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'>夏成</strong><strong
+			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'>任楠</strong><strong
 			style='font-size: 12.0pt; font-family: 仿宋_GB2312; color: #000000'></strong>
 	</p>
 	<p style='text-indent: 23.6pt'>

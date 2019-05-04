@@ -46,7 +46,7 @@ public class StationDaoImpl implements StationDao {
 	@Override
 	public List<Station> getPreparedStations() {
 
-		String sql = "from Station s where s.readData = 1";
+		String sql = "from Station s where 1 = 1";
 		hibernateTemplate.setMaxResults(20);
 		List<?> stations = hibernateTemplate.find(sql);
 		
@@ -54,6 +54,20 @@ public class StationDaoImpl implements StationDao {
 			return null;
 		} else {
 			return (List<Station>) stations;
+		}
+	}
+
+
+	@Override
+	public Station getStationById(String stationId) {
+		String hql = "from Station s where s.stationId=? ";
+		Object[] params = new Object[1];
+		params[0] = stationId;
+		List<?> stations = hibernateTemplate.find(hql, params);
+		if (stations.size() < 1) {
+			return null;
+		} else {
+			return (Station) stations.get(0);
 		}
 	}
 

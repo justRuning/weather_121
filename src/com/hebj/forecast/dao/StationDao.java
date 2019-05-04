@@ -9,6 +9,8 @@ public interface StationDao {
 
 	Station getStationByName(String stationName);
 	
+	Station getStationById(String stationId);
+	
 	List<Station> getPreparedStations();
 	
 	void test();

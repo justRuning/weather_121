@@ -49,27 +49,29 @@
 
 
 <div
-	style="width: 70%; text-align: center; margin-left: auto; margin-right: auto;">
+	style="width: 450px; text-align: center; margin-left: auto; margin-right: auto; font-family: 宋体">
 
 	<table class="table table-bordered table-hover">
-		<thead>
-			<tr class="warning">
-				<th>景区</th>
-				<th>所属城市</th>
-				<th>天空状况</th>
-				<th>风向风力</th>
-				<th>气温（℃）</th>
-			</tr>
-		</thead>
+
 		<tbody>
-			<c:forEach items="${forecasts }" var="forecast">
-				<tr class="success">
-					<th>${forecast.name }</th>
-					<th>${forecast.city}</th>
-					<th>${forecast.sky}</th>
-					<th>${forecast.wind}</th>
-					<th>${forecast.temp}</th>
-				</tr>
+			<c:forEach items="${forecasts }" var="forecast" varStatus="s">
+				<c:if test="${s.index%2==0}">
+
+					<tr style="background-color: #d3eaf2">
+						<th>${forecast.name}(${forecast.city}) </th>
+						<th>${forecast.sky}</th>
+						<th>${forecast.wind}</th>
+						<th>${forecast.temp}℃</th>
+					</tr>
+				</c:if>
+				<c:if test="${s.index%2>0}">
+					<tr style="background-color:">
+						<th>${forecast.name}(${forecast.city}) </th>
+						<th>${forecast.sky}</th>
+						<th>${forecast.wind}</th>
+						<th>${forecast.temp}℃</th>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
@@ -83,7 +85,7 @@
 	style="margin-top: 20px; width: 100px; MARGIN-RIGHT: auto; MARGIN-LEFT: auto;">
 	<a style="width: 150px; font-size: 20px; margin: 10px" id="success"
 		href="#" class="btn btn-info btn-lg"> <span
-		class="glyphicon glyphicon-ok"></span> 邮件发送
+		class="glyphicon glyphicon-ok"></span> 确定
 	</a>
 </div>
 

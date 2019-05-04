@@ -115,7 +115,7 @@ public class GetIndexForecast {
 					element = element.getElementsByTag("a").first();
 				}
 				Elements element2 = element.getElementsByTag("em");
-				String[] txt = element2.get(0).text().split("·");
+				String[] txt = element2.get(element2.size() - 1).text().split("·");
 				content.append(txt[txt.length - 1] + ":");
 				element2 = links.get(i).getElementsByTag("span");
 				content.append(element2.get(0).text().toString() + "\n");

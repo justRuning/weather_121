@@ -220,17 +220,23 @@ public class GetForecastImpl implements GetForecast {
 		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(time);
-		calendar.add(Calendar.HOUR_OF_DAY, -12);
+		// calendar.add(Calendar.HOUR_OF_DAY, -12);
 		int second = hour == 16 ? 7 : 5;
 		DateFormat dateFormat = new SimpleDateFormat("dd");
-		NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication("", "administrator", "123");
-		String filePath = "smb://172.18.132.45/forecast/LHDY" + dateFormat.format(time) + second + "W.ENN";
+		NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication("", "dell", "123");
+		// String filePath = "smb://172.18.132.159/cityforecast/upload/LHDY" +
+		// dateFormat.format(calendar.getTime()) + second
+		// + "W.ENN";
+		String filePath = "D:\\CITYFORECAST\\upload\\LHDY" + dateFormat.format(calendar.getTime()) + second + "W.ENN";
+		// String filePath = "/home/hebj/Documents/LHDY" +
+		// dateFormat.format(calendar.getTime()) + second + "W.ENN";
 		SmbFile smbFile;
 		try {
-			smbFile = new SmbFile(filePath, auth);
-			if (smbFile.exists()) {
-				line = ReadDataFromTxt.readData(smbFile);
-			}
+			// smbFile = new SmbFile(filePath);
+			// if (smbFile.exists()) {
+			// line = ReadDataFromTxt.readData(smbFile);
+			// }
+			line = ReadDataFromTxt.readDataFromTxtByGBK(filePath);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (SmbException e) {

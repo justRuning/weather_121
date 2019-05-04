@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -218,7 +219,7 @@ public class ForecastHelper {
 			stations.put("116", "恐龙化石保护区,乌后旗宝音图,");
 			stations.put("31", "天吉泰机场,五原");
 			stations.put("50", "抗日烈士陵园,五原");
-			stations.put("117", "原生态旅游区,五原牧羊海");
+			stations.put("117", "原生态旅游区,乌中旗牧羊海");
 			stations.put("104", "秦长城,乌前旗小佘太");
 			stations.put("124", "乌梁素海,乌拉特前旗");
 			stations.put("125", "大桦背,乌拉特前旗");
@@ -242,9 +243,10 @@ public class ForecastHelper {
 					lvyou.name = entry.getValue().split(",")[0];
 					lvyou.city = entry.getValue().split(",")[1];
 					lvyou.sky = rs.getString("天气形式");
-					lvyou.temp = rs.getString("最低气温") + "到" + rs.getString("最高气温");
+					lvyou.temp = rs.getString("最低气温") + "～" + rs.getString("最高气温");
 
 					lvyou.wind = getWind(rs.getString("风速")) + rs.getString("风向") + "风";
+					lvyou.wind = lvyou.wind.replaceAll("到", "～");
 					lvyous.add(lvyou);
 					// }
 				}
@@ -1275,23 +1277,27 @@ public class ForecastHelper {
 		int second = hour >= 16 ? 7 : 5;
 		DateFormat dateFormat = new SimpleDateFormat("dd");
 		NtlmPasswordAuthentication auth = new NtlmPasswordAuthentication("", "administrator", "123");
-		String filePath = "smb://172.18.132.45/forecast/LHDY" + dateFormat.format(calendar.getTime()) + second
-				+ "W.ENN";
+//		String filePath = "smb://172.18.132.159/cityforecast/upload/LHDY" + dateFormat.format(calendar.getTime()) + second
+//				+ "W.ENN";
+		String filePath = "D:\\CITYFORECAST\\upload\\LHDY" + dateFormat.format(calendar.getTime()) + second + "W.ENN";
 		SmbFile smbFile;
 		try {
-			smbFile = new SmbFile(filePath, auth);
-			if (smbFile.exists()) {
-				try {
-					line = ReadDataFromTxt.readData(smbFile);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+//			smbFile = new SmbFile(filePath);
+//			if (smbFile.exists()) {
+//				line = ReadDataFromTxt.readData(smbFile);
+//			}
+			//line = ReadDataFromTxt.readDataFromTxt(filePath);
+			line = ReadDataFromTxt.readDataFromTxtByGBK(filePath);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (SmbException e) {
 
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		if (line != null) {

@@ -8,9 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css"
 	href="./style/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./style/css/wechat.css">
 <script type="text/javascript"
 	src="http://api.map.baidu.com/api?v=2.0&ak=sA0bSnULTPEEtWYDd8AgSHWT"></script>
 <script src="./style/js/jquery-1.9.1.min.js"></script>
+
 <script src="./style/bootstrap//js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
@@ -63,7 +65,8 @@
 							class="fa fa-circle-o hbj"></i> 景区预报</a></li>
 					<li id="wechat" class="hbj"><a><i
 							class="fa fa-circle-o hbj"></i> 微信预报</a></li>
-							
+					
+
 
 
 

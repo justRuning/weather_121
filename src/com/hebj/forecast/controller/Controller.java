@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.poi.ss.formula.functions.Count;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,6 +107,7 @@ public class Controller {
 	 * @param text
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/scssForecastMsg", method = RequestMethod.POST)
 	public String scssForecastMsg(@RequestParam(value = "name", required = true) String name,
 			@RequestParam(value = "text", required = true) String text) {
@@ -179,6 +181,7 @@ public class Controller {
 	 * @param text
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/scssYYForecast", method = RequestMethod.POST)
 	public void scssForecast(@RequestParam(value = "name", required = true) String name,
 			@RequestParam(value = "text", required = true) String text) {
@@ -445,22 +448,22 @@ public class Controller {
 
 		ModelAndView model = new ModelAndView("weather.jsp");
 
-		List<WeatherActual> weathers = weatherActualservice.getLastWeather();
-		List<Forecast> forecasts = forecastService.getLastForecast();
-		Map<String, ArrayList<WeatherActual>> weather24 = weatherActualservice.getLast24Weather();
-		String lines = ForecastHelper.getForecastTxt();
-		String time;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月d日");
-		time = dateFormat.format(forecasts.get(0).getBeginTime());
-		time = time + forecasts.get(0).getHour() + "时更新";
-
-		// Map<String, String> map = GetIndexForecast.getWeatherWeb();
-
-		model.addObject("weathers", weathers);
-		model.addObject("forecasts", forecasts);
-		model.addObject("lines", lines);
-		model.addObject("weather24", weather24);
-		model.addObject("time", time);
+//		List<WeatherActual> weathers = weatherActualservice.getLastWeather();
+//		List<Forecast> forecasts = forecastService.getLastForecast();
+//		Map<String, ArrayList<WeatherActual>> weather24 = weatherActualservice.getLast24Weather();
+//		String lines = ForecastHelper.getForecastTxt();
+//		String time;
+//		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月d日");
+//		time = dateFormat.format(forecasts.get(0).getBeginTime());
+//		time = time + forecasts.get(0).getHour() + "时更新";
+//
+//		// Map<String, String> map = GetIndexForecast.getWeatherWeb();
+//
+//		model.addObject("weathers", weathers);
+//		model.addObject("forecasts", forecasts);
+//		model.addObject("lines", lines);
+//		model.addObject("weather24", weather24);
+//		model.addObject("time", time);
 		// model.addObject("map", map);
 
 		return model;
@@ -469,6 +472,28 @@ public class Controller {
 	@RequestMapping("/wechat")
 	public ModelAndView wechat() {
 		ModelAndView model = new ModelAndView("wechat.jsp");
+
+		List<Forecast> forecasts = forecastService.getWeChatForecast();
+		DateFormat dateFormat = new SimpleDateFormat("M月d日");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(forecasts.get(0).getBeginTime());
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		List<String> times = new ArrayList<>();
+		for (int i = 0; i < 7; i++) {
+			String string = dateFormat.format(calendar.getTime()) + "(" + Helper.getDayOfWeek2(calendar.getTime())
+					+ ")";
+			times.add(string);
+			calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+		}
+		model.addObject("times", times);
+		model.addObject("forecasts", forecasts);
+		return model;
+	}
+
+	@RequestMapping("/wechatNew")
+	public ModelAndView wechatNew() {
+		ModelAndView model = new ModelAndView("wechat_new.jsp");
 
 		List<Forecast> forecasts = forecastService.getWeChatForecast();
 		DateFormat dateFormat = new SimpleDateFormat("M月d日");

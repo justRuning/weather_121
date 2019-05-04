@@ -38,9 +38,7 @@ public class ZaoJianServiceImpl implements ZaoJianService {
 		weatherActual = weatherActuals2.get(weatherActuals2.size() - 1);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(weatherActual.getTime());
-		System.out.println(calendar.getTime());
 		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		System.out.println(calendar.getTime());
 		WeatherActual weatherActual2 = weatherActualDao.getWeather(weatherActual.getStation(), calendar.getTime(),
 				weatherActual.getHour());
 		String bijiao = "";
